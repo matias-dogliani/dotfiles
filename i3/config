@@ -9,6 +9,17 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+#Dependencias 
+#playerctl 
+#xclip
+#imagemagic 
+#feh 
+#
+
+
+
+
+
 set $mod Mod4
 set $alt Mod1
 # Font for window titles. Will also be used by the bar unless a different font
@@ -32,12 +43,21 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-#bindsym XF8AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF8AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+#Para PC 
 bindsym $alt+Up exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym $alt+Down exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym $alt+p exec playerctl play-pause
+bindsym $alt+Left  exec playerctl previous
+bindsym $alt+Right exec playerctl next
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -108,15 +128,15 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:Editor"
-set $ws2 "2:FireFox"
-set $ws3 "3:Docs"
-set $ws4 "4:Discord/Telegram"
+set $ws2 "2:Docs"
+set $ws3 "3:FireFox"
+set $ws4 "4:Chats" 
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8:Music"
+set $ws8 "8:Img"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 "10:Music"
 set $base00 #101218
 set $base01 #1f222d
 set $base02 #252936
@@ -145,7 +165,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -157,15 +177,15 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec " i3-msg exit"
-#LO tengo que cambiar para que cierre sesión directo 
+bindsym $mod+alt+e exec " i3-msg exit"
 # resize window (you can also use the mouse for that)
+
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -191,23 +211,37 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+
+#-----------------------Personalizados----------------------------------
+
+
+# Forzar ventanas a espacios de trabajo
+assign [class="Firefox"] workspace $ws3 
+assign [class="Nautilus"] workspace $ws2
+assign [class="TelegramDesktop"] workspace $ws4             
+for_window [class="Spotify"] move to workspace $ws10 
+
+
 bindsym $mod+Shift+x exec bash "$HOME/.config/i3/scripts/md_i3rlock.sh" 
 #bindsym $mod+Shift+x exec i3lock --color "$lock_color"
-bindsym $mod+Shift+a exec shutdown -h now 
-
+bindsym $mod+Shift+s exec shutdown -h now 
 
 #Screenshot 
 bindsym --release $mod+Shift+p exec scrot -s '/home/matias_dogliani/Imágenes/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
 
-
-
 #Lanzadores 
-
-bindsym $mod+Shift+d exec nautilus   #explorador de archivs
+bindsym $mod+Shift+d exec nautilus   #explorador de archivos
 bindsym $mod+Shift+w exec firefox    #navegador 
+bindsym $mod+Shift+o exec octave --force-gui
 
 
-# Widow Colours
+
+#----Windows-----
+#Bordes
+new_window pixel 0
+
+# Window Colours
 #                         border  background text    indicator
   client.focused          $base01 $base01    $base07 $base0F
   client.focused_inactive $base02 $base02    $base03 $base0F
@@ -217,11 +251,12 @@ bindsym $mod+Shift+w exec firefox    #navegador
 
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	position bottom 
 colors {
               separator $base03
               background $base01
               statusline $base05
-#                        border  background text
+#                        	 border  background text
               focused_workspace  $base01 $base01    $base07
               active_workspace   $base01 $base02    $base03
               inactive_workspace $base01 $base01    $base03
