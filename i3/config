@@ -220,15 +220,16 @@ bindsym $mod+r mode "resize"
 assign [class="Firefox"] workspace $ws3 
 assign [class="Nautilus"] workspace $ws2
 assign [class="TelegramDesktop"] workspace $ws4             
+assign [class="Slack"] workspace $ws4             
 for_window [class="Spotify"] move to workspace $ws10 
 
 
-bindsym $mod+Shift+x exec bash "$HOME/.config/i3/scripts/md_i3rlock.sh" 
+bindsym $mod+Shift+x exec bash $HOME/.config/i3/scripts/md_i3rlock.sh 
 #bindsym $mod+Shift+x exec i3lock --color "$lock_color"
 bindsym $mod+Shift+s exec shutdown -h now 
 
 #Screenshot 
-bindsym --release $mod+Shift+p exec scrot -s '/home/matias_dogliani/Imágenes/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'
+bindsym --release $mod+Shift+p exec scrot -s $HOME/Imágenes/%F_%T_$wx$h.png -e 'xclip -selection clipboard -target image/png -i $f'
 
 #Lanzadores 
 bindsym $mod+Shift+d exec nautilus   #explorador de archivos
@@ -265,4 +266,6 @@ colors {
 
 }
  
-exec_always feh --bg-scale /home/matias_dogliani/Imágenes/wallpaper.jpg
+exec firefox 
+exec spotify
+exec_always feh --bg-scale $HOME/Imágenes/wallpaper.*
