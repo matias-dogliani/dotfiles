@@ -66,3 +66,7 @@ nnoremap <silent>  <leader>- :vertical resize -5<CR>
 nnoremap <silent> <leader>gd : YcmCompleter GoTo<CR> 
 nnoremap <silent> <leader>gf : YcmCompleter FixIt<CR>
 
+"Cuesta acordarse del esc 
+inoremap jk <esc> 
+
+
