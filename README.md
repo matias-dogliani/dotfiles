@@ -1,11 +1,9 @@
-# dotfiles
-Personal configuration, scripts, etc 
+# Dotfiles
+Configuración personal para i3wm y VIM, Ubuntu. 
 
 To do: 
 
-Hacer script bash para descargar todas las dependencias 
-
-Ordenar configuracion i3 
-
-Agregar  .vimrc 
-
+- [X] Agregar  .vimrc 
+- [ ] Script de instalación de dependencias 
+- [X] Actualizar i3configblocks 
+- [ ] Autocommand de VIM 
