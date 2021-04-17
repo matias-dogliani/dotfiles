@@ -235,8 +235,7 @@ bindsym --release $mod+Shift+p exec scrot -s $HOME/Imágenes/%F_%T_$wx$h.png -e 
 bindsym $mod+Shift+d exec nautilus   #explorador de archivos
 bindsym $mod+Shift+w exec firefox    #navegador 
 bindsym $mod+Shift+o exec octave --force-gui
-
-
+bindsym $mod+Shift+n exec jupyter-notebook
 
 #----Windows-----
 #Bordes
@@ -269,3 +268,7 @@ colors {
 exec firefox 
 exec spotify
 exec_always feh --bg-scale $HOME/Imágenes/wallpaper.*
+
+exec xset s off
+exec xset -dpms
+exec xset s noblank
