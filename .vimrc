@@ -75,6 +75,9 @@ nnoremap <leader>w :w<CR>
 nnoremap <silent> <leader>gd :YcmCompleter GoTo<CR> 
 nnoremap <silent> <leader>gf :YcmCompleter FixIt<CR>
 
+"Para el copypaste en otros lugares sin la numeracion
+nnoremap <silent> <leader>u :set rnu! <bar> :set nu!<CR> 
+
 "Cuesta acordarse del esc 
 inoremap jk <esc> 
 
