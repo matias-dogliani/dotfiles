@@ -82,7 +82,7 @@ nnoremap <silent> <leader>u :set rnu! <bar> :set nu!<CR>
 inoremap jk <esc> 
 
 "Python 
-autocmd FileType python nnoremap  <leader>r :update<bar>!python3 %<CR>
+autocmd FileType python nnoremap  <leader>r :update<bar>!clear && python3 %<CR>
 
 "autocmd FileType ipynb  nnoremap <silent> <leader> up  :! jup
 
