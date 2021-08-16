@@ -7,3 +7,4 @@ To do:
 - [ ] Script de instalación de dependencias 
 - [X] Actualizar i3configblocks 
 - [ ] Autocommand de VIM 
+- [ ] Link en los archivos de conf a este repo  
