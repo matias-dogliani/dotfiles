@@ -116,3 +116,12 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+source ~/catkin_ws/devel/setup.bash
+export TURTLEBOT3_MODEL=burger
+source /tools/Xilinx/Vivado/2020.2/settings64.sh 
+export OCTAVE_EXECUTABLE=usr/bin/octave-cli
+
+#Cambiar entre distribuciones de teclado 
+
+setxkbmap -layout "us,es" -option "grp:alt_shift_toggle"
