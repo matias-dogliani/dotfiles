@@ -127,16 +127,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:Editor"
-set $ws2 "2:Docs"
-set $ws3 "3:FireFox"
-set $ws4 "4:Chats" 
+set $ws1 "   "
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4: " 
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8:Img"
 set $ws9 "9"
-set $ws10 "10:Music"
+set $ws10 " "
 set $base00 #101218
 set $base01 #1f222d
 set $base02 #252936
@@ -229,7 +229,7 @@ bindsym $mod+Shift+x exec bash $HOME/.config/i3/scripts/md_i3rlock.sh
 bindsym $mod+Shift+s exec shutdown -h now 
 
 #Screenshot 
-bindsym --release $mod+Shift+p exec scrot -s $HOME/Imágenes/%F_%T_$wx$h.png -e 'xclip -selection clipboard -target image/png -i $f'
+bindsym --release $mod+Shift+p exec scrot -s $HOME/Pictures/%F_%T_$wx$h.png -e 'xclip -selection clipboard -target image/png -i $f'
 
 #Lanzadores 
 bindsym $mod+Shift+d exec nautilus   #explorador de archivos
@@ -267,7 +267,7 @@ colors {
  
 exec firefox 
 exec spotify
-exec_always feh --bg-scale $HOME/Imágenes/wallpaper.*
+exec_always feh --bg-scale $HOME/Pictures/wallpaper.*
 
 exec xset s off
 exec xset -dpms
